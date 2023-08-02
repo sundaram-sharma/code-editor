@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import {v4 as uuidV4} from 'uuid';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+
+    const navigate = useNavigate();
 
     const [roomId, setRoomId] = useState('');
     const [userName, setUserName] = useState('');
@@ -12,10 +16,32 @@ const HomePage = () => {
 
         const id = uuidV4;
         setRoomId(id);
-        console.log(id);
+        //console.log(id);
 
+        toast.success('Created a new room'); //new room toast message
+
+    };
+
+
+    const joinRoom = () =>{
+        if(!roomId || !userName){
+            toast.error('Room ID and Username is required')
+            return; //mtlb isse age hame nahi jana hai 
+        }
+
+        //for redirect
+        navigate(`/editor/${roomId}`,{ //here we are using 2nd parameter as state becuase we need usename passed to other page using react usenavigate
+            state:{
+                userName,
+            },
+        })
     }
 
+    const handleInputEnter = (e) =>{
+        if( e.code === 'Enter'){
+            joinRoom();
+        }
+    }
   return (
     <div className='homePageWrapper'>
         <div className='formWrapper'>
@@ -28,6 +54,7 @@ const HomePage = () => {
                     placeholder='ROOM ID'
                     onChange={(e) => setRoomId(e.target.value)}
                     value={roomId}
+                    onKeyUp={handleInputEnter}
                 />
                 <input 
                     type='text'
@@ -35,8 +62,9 @@ const HomePage = () => {
                     placeholder='USERNAME'
                     onChange={(e) => setUserName(e.target.value)}
                     value={userName}
+                    onKeyUp={handleInputEnter}
                 />
-                <button className='btn joinBtn'>Join</button>
+                <button className='btn joinBtn' onClick={joinRoom}>Join</button>
                 <span className="createInfo">
                     If you don't have an invite then create &nbsp; 
                     <a onClick={createNewRoom} href="" className='createNewBtn'>

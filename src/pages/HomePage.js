@@ -37,7 +37,7 @@ const HomePage = () => {
         })
     }
 
-    const handleInputEnter = (e) =>{
+    const handleInputEnter = (e) =>{ //pressing enter will run joinRoom();
         if( e.code === 'Enter'){
             joinRoom();
         }

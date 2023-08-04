@@ -1,5 +1,4 @@
-# Getting Started with Create React App
-
+# Getting Started with code editor powered by CodeMirror
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import Client from '../components/Client';
 import Editor from '../components/Editor';
 
 const EditorPage = () => {
 
+  const socketRef = useRef(null);
   const  [clients, setClients] = useState([ //temp hardcoded values
     {socketId: 1, username: 'Rakesh K'},
     {socketId: 2, username: 'John Cena'}
